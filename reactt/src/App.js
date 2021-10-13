@@ -18,7 +18,7 @@ function App() {
               <Link to="/">홈</Link>
             </li>
             <li>
-              <Link to="/about">소개</Link>
+              <Link to="/about">test</Link>
             </li>
             <li>
               <Link to="/users">사용자</Link>
@@ -56,7 +56,7 @@ function Home() {
   useEffect(
     () => {
       // 클라이언트의 IP주소를 알아내는 백엔드의 함수를 호출합니다.
-      customAxios('/test', callback);
+      customAxios('/api', callback);
     }, []
   );
 
@@ -68,11 +68,27 @@ function Home() {
 }
 
 function About() {
+
+  // IP주소 변수 선언
+  const [test, setTest] = useState('');
+
+  // IP주소 값을 설정합니다.
+  function callback(data) {
+    setTest(data);
+  }
+
+  // 첫번째 렌더링을 다 마친 후 실행합니다.
+  useEffect(
+    () => {
+      // 클라이언트의 IP주소를 알아내는 백엔드의 함수를 호출합니다.
+      customAxios('/test', callback);
+    }, []
+  );
+
   return (
-    <div>
-      <hr />
-      <h2>소개 페이지</h2>
-    </div>
+    <header className="App-header">
+      이 기기의 IP주소는 {test}입니다.
+    </header>
   );
 }
 
